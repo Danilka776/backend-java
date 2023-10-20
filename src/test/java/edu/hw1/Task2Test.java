@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
     @Test
-    @DisplayName("Test1")
+    @DisplayName("Default init 1")
     void test1() {
         // given
         int num = 4666;
@@ -19,7 +19,7 @@ public class Task2Test {
         assertThat(res).isEqualTo(4);
     }
     @Test
-    @DisplayName("Test2")
+    @DisplayName("Default init 2")
     void test2() {
         // given
         int num = 544;
@@ -31,7 +31,7 @@ public class Task2Test {
         assertThat(res).isEqualTo(3);
     }
     @Test
-    @DisplayName("Test3")
+    @DisplayName("Zero at the input")
     void test3() {
         // given
         int num = 0;
@@ -43,7 +43,7 @@ public class Task2Test {
         assertThat(res).isEqualTo(1);
     }
     @Test
-    @DisplayName("Test4")
+    @DisplayName("Negative number at the input")
     void test4() {
         // given
         int num = -15;

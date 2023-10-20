@@ -1,21 +1,22 @@
 package edu.hw1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public final class Task1 {
-    private final static Logger LOGGER = LogManager.getLogger();
 
     private Task1() {
     }
 
-    @SuppressWarnings("MagicNumber")
+    private static final int SEC_IN_MIN = 60;
+
     public static int minutesToSeconds(String time) {
-        int min = Integer.parseInt(time.split(":")[0]);
-        int sec = Integer.parseInt(time.split(":")[1]);
-        if (sec >= 60) {
+        if (time == null || time.isEmpty()) {
             return -1;
         }
-        return min * 60 + sec;
+        int min = Integer.parseInt(time.split(":")[0]);
+        int sec = Integer.parseInt(time.split(":")[1]);
+        if (sec >= SEC_IN_MIN) {
+            return -1;
+        }
+        return min * SEC_IN_MIN + sec;
     }
 }

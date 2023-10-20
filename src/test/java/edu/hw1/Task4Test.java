@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task4Test {
     @Test
-    @DisplayName("Test1")
+    @DisplayName("Default init with digits")
     void test1() {
         // given
         String str = "123456";
@@ -19,7 +19,7 @@ public class Task4Test {
         assertThat(res).isEqualTo("214365");
     }
     @Test
-    @DisplayName("Test2")
+    @DisplayName("Default init with chars")
     void test2() {
         // given
         String str = "hTsii  s aimex dpus rtni.g";
@@ -31,7 +31,7 @@ public class Task4Test {
         assertThat(res).isEqualTo("This is a mixed up string.");
     }
     @Test
-    @DisplayName("Test3")
+    @DisplayName("Odd input")
     void test3() {
         // given
         String str = "badce";
@@ -44,7 +44,7 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Test4")
+    @DisplayName("Empty input")
     void test4() {
         // given
         String str = "";

@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task5Test {
     @Test
-    @DisplayName("Test1")
+    @DisplayName("Descendant in 3 palindrome")
     void test1() {
         // given
         Integer num = 11211230;
@@ -19,7 +19,7 @@ public class Task5Test {
         assertThat(res).isTrue();
     }
     @Test
-    @DisplayName("Test2")
+    @DisplayName("Descendant in 2 palindrome")
     void test2() {
         // given
         Integer num = 13001120;
@@ -31,7 +31,7 @@ public class Task5Test {
         assertThat(res).isTrue();
     }
     @Test
-    @DisplayName("Test3")
+    @DisplayName("Descendant palindrome")
     void test3() {
         // given
         Integer num = 23336014;
@@ -44,7 +44,7 @@ public class Task5Test {
     }
 
     @Test
-    @DisplayName("Test4")
+    @DisplayName("Simply palindrome")
     void test4() {
         // given
         Integer num = 11;
@@ -57,7 +57,7 @@ public class Task5Test {
     }
 
     @Test
-    @DisplayName("Test5")
+    @DisplayName("Descendant palindrome")
     void test5() {
         // given
         Integer num = 123312;
@@ -70,7 +70,7 @@ public class Task5Test {
     }
 
     @Test
-    @DisplayName("Test6")
+    @DisplayName("Not palindrome")
     void test6() {
         // given
         Integer num = 113312;

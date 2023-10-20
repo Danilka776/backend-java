@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task3Test {
     @Test
-    @DisplayName("Test1")
+    @DisplayName("Default init a in b")
     void test1() {
         // given
         int[] a = new int[] {1, 2, 3, 4};
@@ -21,7 +21,7 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Test2")
+    @DisplayName("Default init a in b")
     void test2() {
         // given
         int[] a = new int[] {3, 1};
@@ -35,7 +35,7 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Test3")
+    @DisplayName("Default init a not in b")
     void test3() {
         // given
         int[] a = new int[] {9, 9, 8};
@@ -49,7 +49,7 @@ public class Task3Test {
     }
 
     @Test
-    @DisplayName("Test4")
+    @DisplayName("A is wider than b")
     void test4() {
         // given
         int[] a = new int[] {1, 2, 3, 4};

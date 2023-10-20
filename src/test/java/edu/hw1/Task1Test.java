@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task1Test {
     @Test
-    @DisplayName("Test1")
+    @DisplayName("Default init without seconds")
     void test1() {
         // given
         String time = "01:00";
@@ -18,7 +18,7 @@ public class Task1Test {
         assertThat(minutes).isEqualTo(60);
     }
     @Test
-    @DisplayName("Test2")
+    @DisplayName("Wrong number of seconds")
     void test2() {
         // given
         String time = "10:60";
@@ -30,7 +30,7 @@ public class Task1Test {
         assertThat(minutes).isEqualTo(-1);
     }
     @Test
-    @DisplayName("Test3")
+    @DisplayName("Default init")
     void test3() {
         // given
         String time = "13:56";
@@ -40,5 +40,31 @@ public class Task1Test {
 
         // then
         assertThat(minutes).isEqualTo(836);
+    }
+
+    @Test
+    @DisplayName("Empty init")
+    void test4() {
+        // given
+        String time = "";
+
+        // when
+        int minutes = Task1.minutesToSeconds(time);
+
+        // then
+        assertThat(minutes).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName("Null init")
+    void test5() {
+        // given
+        String time = null;
+
+        // when
+        int minutes = Task1.minutesToSeconds(time);
+
+        // then
+        assertThat(minutes).isEqualTo(-1);
     }
 }
