@@ -12,7 +12,7 @@ public final class Main {
 
     public static void main(String[] args) {
         ConsoleHangman game = new ConsoleHangman();
-        int a = game.Game();
+        int a = game.game();
         if (a == 1) {
             LOGGER.info("Not game");
         } else {
