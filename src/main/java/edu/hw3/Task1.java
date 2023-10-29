@@ -1,7 +1,5 @@
 package edu.hw3;
 
-import java.util.List;
-
 public class Task1 {
 
     private Task1() {
@@ -10,9 +8,9 @@ public class Task1 {
     private static char findChar(char c) {
         char res = c;
         if (c >= 'a' && c <= 'z') {
-            res = (char)('z' - (c - 'a'));
+            res = (char) ('z' - (c - 'a'));
         } else if (c >= 'A' && c <= 'Z') {
-            res = (char)('Z' - (c - 'A'));
+            res = (char) ('Z' - (c - 'A'));
         }
         return res;
     }

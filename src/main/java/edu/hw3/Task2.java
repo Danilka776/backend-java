@@ -20,7 +20,7 @@ public class Task2 {
                 }
                 if (c.equals('(')) {
                     checker++;
-                } else if (c.equals(')')){
+                } else if (c.equals(')')) {
                     checker--;
                 } else {
                     return new ArrayList<String>();

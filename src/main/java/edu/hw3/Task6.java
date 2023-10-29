@@ -13,7 +13,7 @@ public class Task6 {
         String name;
         Integer value;
 
-        Stock (String name, Integer val) {
+        Stock(String name, Integer val) {
             this.name = name;
             this.value = val;
         }
@@ -29,16 +29,19 @@ public class Task6 {
 
     static class StockMarket {
         Queue<Stock> stocks = new PriorityQueue<>(Comparator.comparingInt(Stock::getValue));
-        StockMarket() {
-        };
+
+        StockMarket() {}
+
         /** Добавить акцию */
         void add(Stock stock) {
             stocks.add(stock);
         }
+
         /** Удалить акцию */
         void remove(Stock stock) {
             stocks.remove(stock);
         }
+
         /** Самая дорогая акция */
         Stock mostValuableStock() {
             return getLast(stocks);
@@ -46,7 +49,7 @@ public class Task6 {
 
         private Stock getLast(Queue<Stock> pq) {
             Queue<Stock> pqnew = new PriorityQueue<>(pq);
-            while(pqnew.size() > 1) {
+            while (pqnew.size() > 1) {
                 pqnew.poll();
             }
             return pqnew.poll();
