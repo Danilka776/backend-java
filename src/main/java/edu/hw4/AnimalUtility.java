@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
@@ -12,6 +13,8 @@ public class AnimalUtility {
 
     private AnimalUtility() {
     }
+
+    private static final int HEIGHT = 100;
 
     public static List<Animal> heightSort(List<Animal> zoo) {
         Comparator<Animal> comparator = new Comparator<Animal>() {
@@ -82,5 +85,29 @@ public class AnimalUtility {
 
     public static Optional<Animal> kHeaviestAnimal(List<Animal> zoo, int k) {
         return zoo.stream().filter(x -> x.height() < k).max(Comparator.comparing(Animal::weight));
+    }
+
+    public static Integer countPaws(List<Animal> zoo) {
+        return Math.toIntExact(zoo.stream().flatMapToInt(x -> IntStream.range(0, x.paws())).count());
+    }
+
+    public static List<Animal> filterAgePaws(List<Animal> zoo) {
+        return zoo.stream().filter(x -> x.paws() != x.age()).toList();
+    }
+
+    public static List<Animal> canBite(List<Animal> zoo) {
+        return zoo.stream().filter(x -> x.height() > HEIGHT).filter(Animal::bites).toList();
+    }
+
+    public static Integer weightMoreHeight(List<Animal> zoo) {
+        return Math.toIntExact(zoo.stream().filter(x -> x.weight() > x.height()).count());
+    }
+
+    public static List<Animal> longName(List<Animal> zoo) {
+        return zoo.stream().filter(x -> x.name().split(" ").length > 2).toList();
+    }
+
+    public static Boolean bigDog(List<Animal> zoo, int k) {
+        return zoo.stream().anyMatch(x -> x.type() == Animal.Type.DOG && x.height() > k);
     }
 }
