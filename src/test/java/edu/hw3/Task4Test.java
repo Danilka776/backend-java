@@ -2,16 +2,12 @@ package edu.hw3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class Task4Test {
     @Test
-    @DisplayName("Simple input 1")
+    @DisplayName("ConvertToRomanSimpleNumber")
     void test1() {
         // given
         Integer num = 2;
@@ -24,7 +20,7 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Simple input 2")
+    @DisplayName("ConvertToRomanNumberWithTens")
     void test2() {
         // given
         Integer num = 12;
@@ -37,16 +33,16 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Simple input 3")
+    @DisplayName("ConvertToRomanNumberWithHundreds")
     void test3() {
         // given
-        Integer num = 16;
+        Integer num = 116;
 
         // when
         String roman = Task4.convertToRoman(num);
 
         // then
-        assertThat(roman).isEqualTo("XVI");
+        assertThat(roman).isEqualTo("CXVI");
     }
 
     @Test
@@ -79,7 +75,20 @@ public class Task4Test {
     @DisplayName("Invalid input")
     void test6() {
         // given
-        Integer num = 4553;
+        Integer num = null;
+
+        // when
+        String roman = Task4.convertToRoman(num);
+
+        // then
+        assertNull(roman);
+    }
+
+    @Test
+    @DisplayName("TryToConvertExceedingNumber")
+    void test7() {
+        // given
+        Integer num = 32000000;
 
         // when
         String roman = Task4.convertToRoman(num);

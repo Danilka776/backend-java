@@ -15,7 +15,7 @@ public class Task4 {
     private static final int THOUSAND = 1000;
 
     public static String convertToRoman(Integer num) {
-        if (num < 0 || num > MAX_NUM) {
+        if (num == null || num < 0 || num > MAX_NUM) {
             return null;
         }
         List<String> thousands = new ArrayList<String>(Arrays.asList("", "M", "MM", "MMM"));
