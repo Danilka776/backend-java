@@ -3,12 +3,14 @@ package edu.project1;
 import edu.project1.ConsoleHangman;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Project1Test {
     @Test
-    @DisplayName("Incorrect word length")
-    void test1() {
+    @DisplayName("Get word of length 2")
+    void incorrectWordLength() throws FileNotFoundException {
         // given
         ConsoleHangman game = new ConsoleHangman(4);
 
@@ -20,46 +22,76 @@ public class Project1Test {
     }
 
     @Test
-    @DisplayName("Correct defeat")
-    void test2() {
+    @DisplayName("The right sequence of actions to defeat")
+    void CorrectDefeat() throws FileNotFoundException {
         // given word : hello
         ConsoleHangman game = new ConsoleHangman(0);
 
-        String res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        GuessResult.State res = game.state('t');
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('t');
-        assertThat(res).isEqualTo("Defeat");
+        assertThat(res).isEqualTo(GuessResult.State.Defeat);
 
     }
     @Test
-    @DisplayName("Correct game")
-    void test3() {
+    @DisplayName("The right sequence of actions to win")
+    void CorrectWin() throws FileNotFoundException {
         // given word : hello
         ConsoleHangman game = new ConsoleHangman(0);
 
-        String res = game.state('l');
-        assertThat(res).isEqualTo("Success");
+        GuessResult.State res = game.state('l');
+        assertThat(res).isEqualTo(GuessResult.State.Success);
         res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('o');
-        assertThat(res).isEqualTo("Success");
+        assertThat(res).isEqualTo(GuessResult.State.Success);
         res = game.state('h');
-        assertThat(res).isEqualTo("Success");
+        assertThat(res).isEqualTo(GuessResult.State.Success);
         res = game.state('t');
-        assertThat(res).isEqualTo("Failed");
+        assertThat(res).isEqualTo(GuessResult.State.Failed);
         res = game.state('e');
-        assertThat(res).isEqualTo("Success");
+        assertThat(res).isEqualTo(GuessResult.State.Success);
         res = game.state('e');
-        assertThat(res).isEqualTo("Win");
+        assertThat(res).isEqualTo(GuessResult.State.Win);
+    }
 
+    @Test
+    @DisplayName("Stop game by CTRL+D")
+    void prematureStop() throws FileNotFoundException {
+        // give
+        ConsoleHangman game = new ConsoleHangman();
+
+        // when
+        try {
+            GuessResult.State res = game.state('^'); // ctrl+d
+        } catch (NoSuchElementException e) {
+            // then
+            assertThat(e.getMessage()).isEqualTo("end game!");
+        }
+    }
+
+    @Test
+    @DisplayName("Give incorrect file name")
+    void NoFile() throws FileNotFoundException {
+        // give
+        String fileName = "../wrongFileName";
+
+
+        // when
+        try {
+            ConsoleHangman game = new ConsoleHangman(fileName);
+        } catch (FileNotFoundException e) {
+            // then
+            assertThat(e.getMessage()).isEqualTo("No file");
+        }
     }
 
 }

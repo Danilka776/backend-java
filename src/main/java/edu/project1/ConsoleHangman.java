@@ -1,5 +1,7 @@
 package edu.project1;
 
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 import org.apache.commons.lang3.StringUtils;
@@ -8,19 +10,31 @@ import org.apache.commons.lang3.StringUtils;
 public class ConsoleHangman {
     private final Session curSession;
 
-    public ConsoleHangman(int idxWord) {
+    public ConsoleHangman(int idxWord) throws FileNotFoundException {
         this.curSession = new Session(idxWord);
     }
 
-    public ConsoleHangman() {
+    public ConsoleHangman() throws FileNotFoundException {
         this.curSession = new Session();
+    }
+
+    public ConsoleHangman(String fileName) throws FileNotFoundException {
+        try {
+            this.curSession = new Session(fileName);
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No file");
+        }
     }
 
     public int game() {
         if (curSession.getWord().length() <= 2) {
             return -1;
         } else {
-            run();
+            try {
+                run();
+            } catch (NoSuchElementException e) {
+                return 1;
+            }
             return 0;
         }
     }
@@ -28,7 +42,7 @@ public class ConsoleHangman {
     @SuppressWarnings({"RegexpSinglelineJava", "MultipleStringLiterals"})
     public void run() {
         System.out.println("Hello, it's Hangman game!");
-        System.out.println("If you want to stop the game write : end");
+        System.out.println("If you want to stop the game write: end");
         char guessSymbol = '0';
         while (!curSession.isEndGame()) {
             System.out.println("Guess a letter:");
@@ -52,7 +66,10 @@ public class ConsoleHangman {
         System.out.println(curSession.guess(guessSymbol).message());
     }
 
-    public String state(char c) {
+    public GuessResult.State state(char c) {
+        if (c == '^') {
+            throw new NoSuchElementException("end game!");
+        }
         GuessResult res = tryGuess(curSession, c);
         return res.state(c);
     }

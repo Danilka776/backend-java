@@ -1,20 +1,37 @@
 package edu.project1;
 
+import java.io.FileNotFoundException;
 import org.jetbrains.annotations.NotNull;
 
 public class Session {
-    private static String word = new Dictionary().getRandomWord(0);
+    private String word = "test";
+    private final char[] userAnswer;
 
-    public Session(int idx) {
-        word = new Dictionary().getRandomWord(idx);
+    private static final String FILE_NAME = "../wordsForGame";
+
+    public Session(int idx) throws FileNotFoundException {
+        word = new Dictionary(FILE_NAME).getRandomWord(idx);
+        userAnswer = new Word(word).getCurrentWord();
     }
 
-    public Session() {
-        word = new Dictionary().getRandomWord(-1);
+    public Session(String fileName) throws FileNotFoundException {
+        try {
+            word = new Dictionary(fileName).getRandomWord(-1);
+            userAnswer = new Word(word).getCurrentWord();
+            maxMistake = Dictionary.getMaxMistake();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
+        }
     }
 
-    private static char[] userAnswer = new Word(word).getCurrentWord();
-    private final static int MAX_MISTAKES = 5;
+    public Session() throws FileNotFoundException {
+        word = new Dictionary(FILE_NAME).getRandomWord(-1);
+        userAnswer = new Word(word).getCurrentWord();
+        maxMistake = Dictionary.getMaxMistake();
+    }
+
+
+    private int maxMistake = 1; // Default
     private static int attempts = 0;
     private boolean endGame = false;
     private boolean wonGame = false;
@@ -48,7 +65,7 @@ public class Session {
     }
 
     public int getMaxAttempst() {
-        return MAX_MISTAKES;
+        return maxMistake;
     }
 
     public String getWord() {

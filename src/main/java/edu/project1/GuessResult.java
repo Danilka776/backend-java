@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public sealed interface GuessResult {
-    String state(char c);
+    State state(char c);
 
     int attempt();
 
@@ -13,10 +13,14 @@ public sealed interface GuessResult {
 
     @NotNull String message();
 
+    enum State {
+        Defeat, Success, Win, Failed
+    }
+
     record Defeat(Session s) implements GuessResult {
         @Override
-        public String state(char c) {
-            return "Defeat";
+        public State state(char c) {
+            return State.Defeat;
         }
 
         @Override
@@ -37,9 +41,9 @@ public sealed interface GuessResult {
 
     record Win(Session s) implements GuessResult {
         @Override
-        public String state(char c) {
+        public State state(char c) {
             s.setWon();
-            return "Win";
+            return State.Win;
         }
 
         @Override
@@ -60,13 +64,13 @@ public sealed interface GuessResult {
 
     record SuccessfulGuess(Session s) implements GuessResult {
         @Override
-        public String state(char c) {
+        public State state(char c) {
             s.changeWord(c);
             if (Arrays.equals(s.getUserAnswer(), s.getWord().toCharArray())) {
                 s.setWon();
                 s.setEndGame();
             }
-            return "Success";
+            return State.Success;
         }
 
         @Override
@@ -87,8 +91,8 @@ public sealed interface GuessResult {
 
     record FailedGuess(Session s) implements GuessResult {
         @Override
-        public String state(char c) {
-            return "Failed";
+        public State state(char c) {
+            return State.Failed;
         }
 
         @Override
