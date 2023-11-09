@@ -32,7 +32,7 @@ public class Dictionary {
     public static Integer getMaxMistake() {
         int data = 0;
         try {
-            File myObj = new File("../maxMistake");
+            File myObj = new File("maxMistake");
             Scanner myReader = new Scanner(myObj);
             if (myReader.hasNextLine()) {
                 data = Integer.parseInt(myReader.nextLine());

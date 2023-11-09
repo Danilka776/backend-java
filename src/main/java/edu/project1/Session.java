@@ -7,7 +7,7 @@ public class Session {
     private String word = "test";
     private final char[] userAnswer;
 
-    private static final String FILE_NAME = "../wordsForGame";
+    private static final String FILE_NAME = "wordsForGame";
 
     public Session(int idx) throws FileNotFoundException {
         word = new Dictionary(FILE_NAME).getRandomWord(idx);
