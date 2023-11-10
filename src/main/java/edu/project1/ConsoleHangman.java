@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
-import org.apache.commons.lang3.StringUtils;
 
 
 public class ConsoleHangman {
@@ -52,7 +51,7 @@ public class ConsoleHangman {
                 curSession.giveUp();
                 System.exit(0);
             }
-            while (guessInput.length() > 1 || StringUtils.isNumeric(guessInput)) {
+            while (guessInput.length() > 1 || !Character.isDigit(guessInput.charAt(0))) {
                 System.out.println("Guess a letter:");
                 if (Objects.equals(guessInput, "end")) {
                     curSession.giveUp();
