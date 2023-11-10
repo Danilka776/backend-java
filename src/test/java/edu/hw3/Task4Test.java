@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class Task4Test {
     @Test
-    @DisplayName("ConvertToRomanSimpleNumber")
-    void test1() {
+    @DisplayName("Convert to roman number 2")
+    void convertToRomanSimpleNumber() {
         // given
         Integer num = 2;
 
@@ -20,8 +20,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("ConvertToRomanNumberWithTens")
-    void test2() {
+    @DisplayName("Convert to roman number with tens")
+    void convertToRomanNumberWithTens() {
         // given
         Integer num = 12;
 
@@ -33,8 +33,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("ConvertToRomanNumberWithHundreds")
-    void test3() {
+    @DisplayName("Convert to roman number with hundreds")
+    void convertToRomanNumberWithHundreds() {
         // given
         Integer num = 116;
 
@@ -46,8 +46,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Max input")
-    void test4() {
+    @DisplayName("Get on input num 3999")
+    void maxInput() {
         // given
         Integer num = 3999;
 
@@ -59,8 +59,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Zero input")
-    void test5() {
+    @DisplayName("Get on input num 0")
+    void zeroInput() {
         // given
         Integer num = 0;
 
@@ -72,8 +72,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Invalid input")
-    void test6() {
+    @DisplayName("Get on input null")
+    void invalidInput() {
         // given
         Integer num = null;
 
@@ -85,8 +85,8 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("TryToConvertExceedingNumber")
-    void test7() {
+    @DisplayName("Get on input number 32'000'000")
+    void TryToConvertExceedingNumber() {
         // given
         Integer num = 32000000;
 
