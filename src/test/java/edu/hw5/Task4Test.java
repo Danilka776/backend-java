@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task4Test {
-        @Test
+    @Test
     @DisplayName("Get password with @")
     void getNextFriday13th() {
         // given
