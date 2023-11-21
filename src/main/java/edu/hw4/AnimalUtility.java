@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -110,4 +111,47 @@ public class AnimalUtility {
     public static Boolean bigDog(List<Animal> zoo, int k) {
         return zoo.stream().anyMatch(x -> x.type() == Animal.Type.DOG && x.height() > k);
     }
-}
+
+    public static Map<Animal.Type, Integer> totalWeightByType(List<Animal> zoo, int k, int l) {
+        return zoo.stream().filter(x -> x.age() >= k && x.age() <= l)
+                    .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
+    }
+
+    public static List<Animal> sortedZoo(List<Animal> zoo) {
+        return zoo.stream().sorted(Comparator.comparing(Animal::type)
+                .thenComparing(Animal::sex)
+                .thenComparing(Animal::name))
+                .collect(Collectors.toList());
+    }
+
+    public static Boolean isSpiderDangerDog(List<Animal> zoo) {
+        long freqSpider = zoo.stream().filter(x -> x.type() == Animal.Type.SPIDER && x.bites()).count();
+        long freqDog = zoo.stream().filter(x -> x.type() == Animal.Type.DOG && x.bites()).count();
+        if (freqDog == 0 || freqSpider == 0) {
+            return false;
+        }
+        return freqSpider > freqDog;
+    }
+
+    public static Animal heaviestFish(List<List<Animal>> zoos) {
+        return zoos.stream().flatMap(List::stream).filter(x -> x.type() == Animal.Type.FISH)
+                    .max(Comparator.comparing(Animal::weight)).orElse(null);
+    }
+
+    public static Map<String, Set<Error.ValidationError>> wrongAnimalField(List<Animal> zoo) {
+        return zoo.stream().filter(x -> !Error.isValidAnimal(x))
+                .collect(Collectors.toMap(
+                    Animal::name,
+                    Error::getValidationErrors
+            ));
+    }
+
+    public static Map<String, String> wrongAnimalStringField(List<Animal> zoo) {
+        return zoo.stream().filter(x -> !Error.isValidAnimal(x))
+                .collect(Collectors.toMap(
+                    Animal::name,
+                    Error::getValidationField
+                    //(existing, replacement) -> existing // если есть дубликаты имен, оставляем первую запись
+            ));
+    }
+ }
