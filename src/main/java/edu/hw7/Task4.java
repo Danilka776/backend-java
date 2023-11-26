@@ -3,9 +3,8 @@ package edu.hw7;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 import static edu.project1.Main.LOGGER;
 
 public class Task4 {
@@ -16,6 +15,7 @@ public class Task4 {
     private static final double BOUNDS = 0.5;
     private static final List<Integer> SIMULATIONS = List.of(10_000_000, 100_000_000, 1_000_000_000);
 
+    @SuppressWarnings("RegexpSinglelineJava")
     public static List<Long> getTimeOneThreadMonteCarlo() {
         List<Long> timeResult = new ArrayList<>();
         System.out.println("Single thread result: ");
@@ -25,11 +25,12 @@ public class Task4 {
             long finish = System.currentTimeMillis();
             long time = finish - start;
             timeResult.add(time);
-            System.out.println("On %d simulations pi = %f time = %d мс".formatted(simulation, calculatedPi, time));
+            System.out.println("On %d simulation pi = %f time = %d мс".formatted(simulation, calculatedPi, time));
         }
         return timeResult;
     }
 
+    @SuppressWarnings("RegexpSinglelineJava")
     public static List<Long> getTimeMultiThreadMonteCarlo() {
         List<Long> timeResult = new ArrayList<>();
         int numProcessors = Runtime.getRuntime().availableProcessors();
@@ -44,7 +45,8 @@ public class Task4 {
                 long time = finish - start;
                 timeResult.add(time);
                 System.out.println("Number of threads is " + numThreads);
-                System.out.println("On %d simulations pi = %f time = %d мс".formatted(SIMULATIONS.get(i), calculatedPi, time));
+                System.out.println("On %d simulations pi = %f time = %d мс"
+                    .formatted(SIMULATIONS.get(i), calculatedPi, time));
 
 
                 double speedup = (double) singleThreadTime.get(i) / time;
@@ -60,6 +62,7 @@ public class Task4 {
         return timeResult;
     }
 
+    @SuppressWarnings("MagicNumber")
     public static double calculatePiOneThread(int n) {
         int totalCount = 0;
         int circleCount = 0;
@@ -75,6 +78,7 @@ public class Task4 {
         return 4 * ((double) circleCount / totalCount);
     }
 
+    @SuppressWarnings("MagicNumber")
     public static double calculatePiMultiThread(int numSimulations, int numThreads) {
         AtomicInteger[] circleCountArray = new AtomicInteger[numThreads];
         AtomicInteger[] totalCountArray = new AtomicInteger[numThreads];
@@ -118,11 +122,7 @@ public class Task4 {
             totalCount += totalCountArray[i].get();
         }
 
-        return 4 * ((double) totalCircleCount/ totalCount);
+        return 4 * ((double) totalCircleCount / totalCount);
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(Task4.getTimeMultiThreadMonteCarlo());
-    }
 }

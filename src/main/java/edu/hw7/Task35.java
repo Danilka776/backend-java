@@ -1,14 +1,19 @@
 package edu.hw7;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class Task3_5 {
+public class Task35 {
 
-    private Task3_5() {
+    private Task35() {
     }
 
     public record Person(int id, String name, String address, String phoneNumber) {}

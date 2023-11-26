@@ -9,11 +9,11 @@ public class Task35Test {
     @DisplayName("Checking the correctness of database synchronization")
     void correctDatabaseSynchronization() throws InterruptedException {
         // given
-        Task3_5.Person person1 = new Task3_5.Person(1, "Jon", "jon@mail", "123456");
-        Task3_5.Person person2 = new Task3_5.Person(2, "Bob", "bob@mail", "7892342");
-        Task3_5.Person person3 = new Task3_5.Person(3, "Karen", "karen@mail", "12234345");
-        Task3_5.Person person4 = new Task3_5.Person(4, "Sam", "sam@mail", "12345");
-        Task3_5.PersonDatabase database = new Task3_5.MyPersonDatabase();
+        Task35.Person person1 = new Task35.Person(1, "Jon", "jon@mail", "123456");
+        Task35.Person person2 = new Task35.Person(2, "Bob", "bob@mail", "7892342");
+        Task35.Person person3 = new Task35.Person(3, "Karen", "karen@mail", "12234345");
+        Task35.Person person4 = new Task35.Person(4, "Sam", "sam@mail", "12345");
+        Task35.PersonDatabase database = new Task35.MyPersonDatabase();
         // when
         Thread thread1 = new Thread(() -> {
             database.add(person2);
