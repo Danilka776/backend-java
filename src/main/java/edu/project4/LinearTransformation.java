@@ -3,14 +3,24 @@ package edu.project4;
 import java.util.Random;
 
 class LinearTransformation implements Fractal.Transformation {
-    private final double a, b, c, d, e, f;
+    private final double a;
+    private final double b;
+    private final double c;
+    private final double d;
+    private final double e;
+    private final double f;
+
 
     private final Random random = new Random();
-    private final int Red = random.nextInt(256);
-    private final int Green = random.nextInt(256);
-    private final int Blue = random.nextInt(256);
+    private final int red = random.nextInt(256);
+    private final int green = random.nextInt(256);
+    private final int blue = random.nextInt(256);
+    //private final int Red = 0;
+    //private final int Green = 144;
+    //private final int Blue = 15;
 
-    public LinearTransformation(double a, double b, double c, double d, double e, double f) {
+
+    LinearTransformation(double a, double b, double c, double d, double e, double f) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -21,21 +31,24 @@ class LinearTransformation implements Fractal.Transformation {
 
     @Override
     public Point apply(Point p) {
-        double x = a * p.x + b * p.y + e;
-        double y = c * p.x + d * p.y + f;
-        return new Point(x, y, Red, Green, Blue);
+        double x = a * p.x + b * p.y + c;
+        double y = d * p.x + e * p.y + f;
+        return new Point(x, y, red, green, blue);
     }
+
     @Override
     public int getRed() {
-        return Red;
+        return red;
     }
+
     @Override
     public int getGreen() {
-        return Green;
+        return green;
     }
+
     @Override
     public int getBlue() {
-        return Blue;
+        return blue;
     }
 
 }

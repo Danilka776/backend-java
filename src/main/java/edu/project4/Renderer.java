@@ -2,9 +2,10 @@ package edu.project4;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Renderer {
-    private static final Random random = new Random();
+    private static final Random random = ThreadLocalRandom.current();
     public static final double X_MIN = -1.777;
     public static final double X_MAX = 1.777;
     public static final double Y_MIN = -1.0;
@@ -12,14 +13,13 @@ public class Renderer {
 
     public static Fractal.FractalImage render(
         Fractal.FractalImage canvas,
-        Rect world,
         List<Fractal.Transformation> affineTransformations,
         List<Fractal.Transformation> nonLinearTransformations,
         int samples,
-        short iterPerSample,
+        int iterPerSample,
         long seed
     ) {
-        random.setSeed(seed);
+        //random.setSeed(seed);
         double symmetry = 2.0;
 
         for (int num = 0; num < samples; ++num) {
@@ -29,11 +29,11 @@ public class Renderer {
                 Fractal.Transformation affineTransformation = randomVariation(affineTransformations);
                 Fractal.Transformation nonLinearTransformation = randomVariation(nonLinearTransformations);
 
-                Point pwNew = affineTransformation.apply(pw);
-                pwNew = nonLinearTransformation.apply(pwNew);
-                if (step >= 0 && pwNew.isCorrect(Y_MAX, X_MAX)) {
-                    int y = canvas.height - (int) (((Y_MAX - pwNew.y) / (Y_MAX - Y_MIN)) * canvas.height);
-                    int x = canvas.width - (int) (((X_MAX - pwNew.x) / (X_MAX - X_MIN)) * canvas.width);
+                pw = affineTransformation.apply(pw);
+                pw = nonLinearTransformation.apply(pw);
+                if (step >= 0 && pw.isCorrect(Y_MAX, X_MAX)) {
+                    int y = canvas.height - (int) (((Y_MAX - pw.y) / (Y_MAX - Y_MIN)) * canvas.height);
+                    int x = canvas.width - (int) (((X_MAX - pw.x) / (X_MAX - X_MIN)) * canvas.width);
 
                     if (x < canvas.width && y < canvas.height) {
                         canvas.pixel(x, y).blendColor(affineTransformation.getRed(),

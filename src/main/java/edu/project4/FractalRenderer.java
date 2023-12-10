@@ -1,36 +1,47 @@
 package edu.project4;
-import javax.imageio.ImageIO;
+
+import edu.project4.Fractal.FractalImage;
+import edu.project4.Fractal.Transformation;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import edu.project4.Fractal.*;
+import javax.imageio.ImageIO;
+
 
 public class FractalRenderer {
+
+    private FractalRenderer() {
+    }
+
+    @SuppressWarnings({"UncommentedMain", "MagicNumber"})
     public static void main(String[] args) {
         int width = 1920;
         int height = 1080;
         Fractal.FractalImage fractalImage = Fractal.FractalImage.create(width, height);
 
-        Rect world = new Rect(0, 0, 2.5, 2.5);
         List<Transformation> affineTransformation = new ArrayList<>();
         List<Transformation> nonLinearTransformation = new ArrayList<>();
-        affineTransformation.add(new LinearTransformation(0.5, 0, 0, 0.5, 0, 1));  // Линейное преобразование
-        affineTransformation.add(new LinearTransformation(0, 1, 0, 0.5, 1, 0));  // Линейное преобразование
-        nonLinearTransformation.add(new SineTransformation(2, 1));  // Синусоидальное преобразование
+        affineTransformation.add(new LinearTransformation(0.5, 0, 0, 0.5, 0.8, 1));  // Линейное преобразование
+        affineTransformation.add(new LinearTransformation(0, 0.9, 0, 0.5, 0, 0));  // Линейное преобразование
+        nonLinearTransformation.add(new SineTransformation(1, 1));  // Синусоидальное преобразование
         nonLinearTransformation.add(new SphericalTransformation(2));  // Сферическое преобразование
+        //nonLinearTransformation.add(new NonAffineTransformation());
 
-        int samples = 50000;
-        short iterPerSample = 50;
+        int samples = 10;
+        int iterPerSample = 30000;
         long seed = System.currentTimeMillis();
 
-        FractalImage renderedImage = Renderer.render(fractalImage, world,affineTransformation, nonLinearTransformation, samples, iterPerSample, seed);
+        FractalImage renderedImage = Renderer.render(fractalImage, affineTransformation, nonLinearTransformation,
+            samples, iterPerSample, seed);
 
         BufferedImage bufferedImage = createBufferedImage(renderedImage);
-        saveImage(bufferedImage, "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/project4/pictures/fractal_image.png");
+        saveImage(bufferedImage,
+            "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/project4/pictures/fractal_image.png");
     }
 
+    @SuppressWarnings("MagicNumber")
     private static BufferedImage createBufferedImage(FractalImage image) {
         BufferedImage bufferedImage = new BufferedImage(image.width, image.height, BufferedImage.TYPE_INT_RGB);
 

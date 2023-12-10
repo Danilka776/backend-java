@@ -11,21 +11,22 @@ public class Fractal {
 
 
     public static class FractalImage {
-        private final Pixel[] data;
+        private final Pixel[][] data;
         final int width;
         final int height;
 
-        public FractalImage(Pixel[] data, int width, int height) {
+        public FractalImage(Pixel[][] data, int width, int height) {
             this.data = data;
             this.width = width;
             this.height = height;
         }
 
         public static FractalImage create(int width, int height) {
-            Pixel[] data = new Pixel[width * height];
-
-            for (int i = 0; i < data.length; i++) {
-                data[i] = new Pixel(0, 0, 0, 0);  // черные пиксели
+            Pixel[][] data = new Pixel[width][height];
+            for (int i = 0; i < width; ++i) {
+                for (int j = 0; j < height; ++j) {
+                    data[i][j] = new Pixel(0, 0, 0, 0); // черные пиксели
+                }
             }
 
             return new FractalImage(data, width, height);
@@ -36,21 +37,10 @@ public class Fractal {
         }
 
         public Pixel pixel(int x, int y) {
-            return data[y * width + x];
+            return data[x][y];
         }
 
         // Добавьте методы для работы с изображением, например, для гамма-коррекции
     }
-
-
-
-    //public class ImageUtils {
-    //    public static void save(FractalImage image, String filename, ImageFormat format) {
-    //        // Реализуйте сохранение изображения в указанный формат
-    //    }
-    //}
-
-
-
 
 }

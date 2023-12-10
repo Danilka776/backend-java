@@ -6,9 +6,9 @@ public class SphericalTransformation implements Fractal.Transformation {
     private final double scale;
 
     private final Random random = new Random();
-    private final int Red = random.nextInt(256);
-    private final int Green = random.nextInt(256);
-    private final int Blue = random.nextInt(256);
+    private final int red = random.nextInt(256);
+    private final int green = random.nextInt(256);
+    private final int blue = random.nextInt(256);
 
     public SphericalTransformation(double scale) {
         this.scale = scale;
@@ -22,18 +22,21 @@ public class SphericalTransformation implements Fractal.Transformation {
         double x = newR * Math.cos(theta);
         double y = newR * Math.sin(theta);
 
-        return new Point(x, y, Red, Green, Blue);
+        return new Point(x, y, red, green, blue);
     }
+
     @Override
     public int getRed() {
-        return Red;
+        return red;
     }
+
     @Override
     public int getGreen() {
-        return Green;
+        return green;
     }
+
     @Override
     public int getBlue() {
-        return Blue;
+        return blue;
     }
 }
