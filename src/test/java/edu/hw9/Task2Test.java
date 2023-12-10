@@ -12,32 +12,29 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class Task2Test {
     @Test
-    @DisplayName("Checking the efficiency of finding directories with more than 10 files")
+    @DisplayName("Checking the efficiency of finding directories with more than 5 files")
     void getDirectories() {
         // given
-        String pathName = "/Users/daniltarasov/backend-java/backend-java/.git";
+        String pathName = "src/test/java/edu/hw9/";
         // when
         List<File> getDirectory = Task21.FileSearchTask.getBigDirectory(pathName);
         String[] stringArrayOfDirectory = new String[getDirectory.size()];
         for (int i = 0; i < getDirectory.size(); i++) {
-            stringArrayOfDirectory[i] = getDirectory.get(i).getAbsolutePath();
+            stringArrayOfDirectory[i] = getDirectory.get(i).toString();
         }
         // then
         assertArrayEquals(stringArrayOfDirectory, new String[]{
-            "/Users/daniltarasov/backend-java/backend-java/.git/objects",
-            "/Users/daniltarasov/backend-java/backend-java/.git/hooks",
-            "/Users/daniltarasov/backend-java/backend-java/.git/logs/refs/heads",
-            "/Users/daniltarasov/backend-java/backend-java/.git/refs/heads"
+            "src/test/java/edu/hw9/TestFolder",
         });
     }
 
     @Test
-    @DisplayName("Checking the efficiency of finding files by predicate: size > 3300 and ends on '.java'")
+    @DisplayName("Checking the efficiency of finding files by predicate: size > 10 and ends on '.txt'")
     void getFiles() {
         // given
-        String pathName = "/Users/daniltarasov/backend-java/backend-java/";
-        int size = 3300;
-        String end = ".java";
+        String pathName = "src/test/java/edu/hw9/TestFolder";
+        int size = 10;
+        String end = ".txt";
 
         // when
         List<File> getFiles = Task22.FileSearchTask.getFileByPredicate(pathName, size, end);
@@ -47,9 +44,7 @@ public class Task2Test {
         }
         // then
         assertArrayEquals(stringArrayOfFiles, new String[]{
-            "/Users/daniltarasov/backend-java/backend-java/src/test/java/edu/project1/Project1Test.java",
-            "/Users/daniltarasov/backend-java/backend-java/src/test/java/edu/hw1/Task8Test.java",
-            "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/hw9/Task1.java",
+            "src/test/java/edu/hw9/TestFolder/test6.txt",
         });
     }
 

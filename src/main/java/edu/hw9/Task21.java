@@ -11,7 +11,7 @@ public final class Task21 {
     private Task21() {
     }
 
-    public static final int NUM_OF_FILES_IN_DIRECTORY = 10; // 1_000
+    public static final int NUM_OF_FILES_IN_DIRECTORY = 5; // 1_000
 
     public static class FileSearchTask extends RecursiveTask<List<File>> {
         private final File directory;
