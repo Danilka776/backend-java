@@ -15,16 +15,18 @@ public class Task2Test {
     @DisplayName("Checking the efficiency of finding directories with more than 5 files")
     void getDirectories() {
         // given
-        String pathName = "src/test/java/edu/hw9/";
+        String path = System.getProperty("user.dir");
+        String pathName = path+"/src/test/java/edu/hw9/";
         // when
         List<File> getDirectory = Task21.FileSearchTask.getBigDirectory(pathName);
         String[] stringArrayOfDirectory = new String[getDirectory.size()];
         for (int i = 0; i < getDirectory.size(); i++) {
             stringArrayOfDirectory[i] = getDirectory.get(i).toString();
         }
+
         // then
         assertArrayEquals(stringArrayOfDirectory, new String[]{
-            "src/test/java/edu/hw9/TestFolder",
+            path+"/src/test/java/edu/hw9/TestFolder",
         });
     }
 
@@ -42,9 +44,10 @@ public class Task2Test {
         for (int i = 0; i < getFiles.size(); i++) {
             stringArrayOfFiles[i] = getFiles.get(i).getAbsolutePath();
         }
+        String path = System.getProperty("user.dir");
         // then
         assertArrayEquals(stringArrayOfFiles, new String[]{
-            "src/test/java/edu/hw9/TestFolder/test6.txt",
+            path+"/src/test/java/edu/hw9/TestFolder/test6.txt",
         });
     }
 
