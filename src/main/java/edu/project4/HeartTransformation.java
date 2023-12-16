@@ -2,28 +2,26 @@ package edu.project4;
 
 import java.util.Random;
 
-public class SphericalTransformation implements Fractal.Transformation {
-    private final double scale;
+public class HeartTransformation implements Fractal.Transformation {
 
     private final Random random = new Random();
     private final int red = random.nextInt(256);
     private final int green = random.nextInt(256);
     private final int blue = random.nextInt(256);
 
-    public SphericalTransformation(double scale) {
-        this.scale = scale;
+    private final double a;
+
+    public HeartTransformation(double a) {
+        this.a = a;
     }
 
     @Override
     public Point apply(Point p) {
-        //double r = Math.sqrt(p.x * p.x + p.y * p.y);
-        double r = p.x * p.x + p.y * p.y;
-        //double theta = Math.atan2(p.y, p.x);
-        //double newR = scale * Math.sin(r);
-        //double x = newR * Math.cos(theta);
-        //double y = newR * Math.sin(theta);
-        double x = scale * p.x / r;
-        double y = scale * p.y / r;
+        double r = Math.sqrt(p.x * p.x + p.y * p.y);
+        double arctg = Math.atan(p.y / p.x);
+
+        double x = a * r * Math.sin(r * arctg);
+        double y = -1 * a * r * Math.cos(r * arctg);
 
         return new Point(x, y, red, green, blue);
     }

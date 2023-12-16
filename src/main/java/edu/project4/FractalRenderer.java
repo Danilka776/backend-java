@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 
@@ -21,16 +22,17 @@ public class FractalRenderer {
         int height = 1080;
         Fractal.FractalImage fractalImage = Fractal.FractalImage.create(width, height);
 
-        List<Transformation> affineTransformation = new ArrayList<>();
+        List<Transformation> affineTransformation = getAffineTransformation(8);
         List<Transformation> nonLinearTransformation = new ArrayList<>();
-        affineTransformation.add(new LinearTransformation(0.5, 0, 0, 0.5, 0.8, 1));  // Линейное преобразование
-        affineTransformation.add(new LinearTransformation(0, 0.9, 0, 0.5, 0, 0));  // Линейное преобразование
-        nonLinearTransformation.add(new SineTransformation(1, 1));  // Синусоидальное преобразование
-        nonLinearTransformation.add(new SphericalTransformation(2));  // Сферическое преобразование
+        //affineTransformation.add(new LinearTransformation(0.5, 0, 0, 0.5, 0.8, 1));  // Линейное преобразование
+        //affineTransformation.add(new LinearTransformation(0, 0.9, 0, 0.5, 0, 0));  // Линейное преобразование
+        nonLinearTransformation.add(new SineTransformation((double) 1920 /2, (double) 1080 /2));  // Синусоидальное преобразование
+        nonLinearTransformation.add(new SphericalTransformation(0.1));  // Сферическое преобразование
+        nonLinearTransformation.add(new DiskTransformation(0.05));  // Диск преобразование
+        nonLinearTransformation.add(new HeartTransformation(0.5));  // Сердце преобразование
         //nonLinearTransformation.add(new NonAffineTransformation());
-
-        int samples = 10;
-        int iterPerSample = 30000;
+        int samples = 100000;
+        int iterPerSample = 200;
         long seed = System.currentTimeMillis();
 
         FractalImage renderedImage = Renderer.render(fractalImage, affineTransformation, nonLinearTransformation,
@@ -38,7 +40,7 @@ public class FractalRenderer {
 
         BufferedImage bufferedImage = createBufferedImage(renderedImage);
         saveImage(bufferedImage,
-            "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/project4/pictures/fractal_image.png");
+            "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/project4/pictures/fractal_image_8.png");
     }
 
     @SuppressWarnings("MagicNumber")
@@ -63,5 +65,36 @@ public class FractalRenderer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static List<Transformation> getAffineTransformation(int numTransformations) {
+        List<Transformation> affineTransformation = new ArrayList<>();
+        final Random random = new Random();
+        for (int i = 0; i < numTransformations; i++) {
+            boolean cheack = false;
+            double a = random.nextDouble(1);
+            double b = random.nextDouble(1);
+            double c = random.nextDouble(1);
+            double d = random.nextDouble(1);
+            double e = random.nextDouble(1);
+            double f = random.nextDouble(1);
+            while (!cheack) {
+                if ((a * a + d * d < 1) &&
+                    (b * b + e * e < 1) &&
+                    (a * a + b * b + d * d + e * e < 1 + (a * e - d * b) * (a * e - d * b))) {
+                    cheack = true;
+                }
+                a = random.nextDouble(1);
+                b = random.nextDouble(1);
+                c = random.nextDouble(1);
+                d = random.nextDouble(1);
+                e = random.nextDouble(1);
+                f = random.nextDouble(1);
+            }
+            affineTransformation.add(new LinearTransformation(a, b, c, d, e, f));
+        }
+
+
+        return affineTransformation;
     }
 }

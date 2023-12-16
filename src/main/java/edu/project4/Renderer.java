@@ -6,8 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Renderer {
     private static final Random random = ThreadLocalRandom.current();
-    public static final double X_MIN = -1.777;
-    public static final double X_MAX = 1.777;
+    public static final double X_MIN = -1.0;
+    public static final double X_MAX = 1.0;
     public static final double Y_MIN = -1.0;
     public static final double Y_MAX = 1.0;
 
