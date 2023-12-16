@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.imageio.ImageIO;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class FractalRenderer {
+
+    private final static Logger LOGGER = LogManager.getLogger();
 
     private FractalRenderer() {
     }
@@ -26,11 +29,11 @@ public class FractalRenderer {
         List<Transformation> nonLinearTransformation = new ArrayList<>();
         //affineTransformation.add(new LinearTransformation(0.5, 0, 0, 0.5, 0.8, 1));  // Линейное преобразование
         //affineTransformation.add(new LinearTransformation(0, 0.9, 0, 0.5, 0, 0));  // Линейное преобразование
-        nonLinearTransformation.add(new SineTransformation((double) 1920 /2, (double) 1080 /2));  // Синусоидальное преобразование
+        // Синусоидальное преобразование
+        nonLinearTransformation.add(new SineTransformation((double) 1920 / 2, (double) 1080 / 2));
         nonLinearTransformation.add(new SphericalTransformation(0.1));  // Сферическое преобразование
         nonLinearTransformation.add(new DiskTransformation(0.05));  // Диск преобразование
         nonLinearTransformation.add(new HeartTransformation(0.5));  // Сердце преобразование
-        //nonLinearTransformation.add(new NonAffineTransformation());
         int samples = 100000;
         int iterPerSample = 200;
         long seed = System.currentTimeMillis();
@@ -63,7 +66,7 @@ public class FractalRenderer {
             File outputfile = new File(filename);
             ImageIO.write(image, "png", outputfile);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getMessage());
         }
     }
 
@@ -79,9 +82,9 @@ public class FractalRenderer {
             double e = random.nextDouble(1);
             double f = random.nextDouble(1);
             while (!cheack) {
-                if ((a * a + d * d < 1) &&
-                    (b * b + e * e < 1) &&
-                    (a * a + b * b + d * d + e * e < 1 + (a * e - d * b) * (a * e - d * b))) {
+                if ((a * a + d * d < 1)
+                    && (b * b + e * e < 1)
+                    && (a * a + b * b + d * d + e * e < 1 + (a * e - d * b) * (a * e - d * b))) {
                     cheack = true;
                 }
                 a = random.nextDouble(1);

@@ -1,7 +1,10 @@
 package edu.project4;
 
 public class Pixel {
-    public int r, g, b, hitCount;
+    public int r;
+    public int g;
+    public int b;
+    public int hitCount;
 
     public Pixel(int r, int g, int b, int hitCount) {
         this.r = r;

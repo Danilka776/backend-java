@@ -16,12 +16,7 @@ public class SphericalTransformation implements Fractal.Transformation {
 
     @Override
     public Point apply(Point p) {
-        //double r = Math.sqrt(p.x * p.x + p.y * p.y);
         double r = p.x * p.x + p.y * p.y;
-        //double theta = Math.atan2(p.y, p.x);
-        //double newR = scale * Math.sin(r);
-        //double x = newR * Math.cos(theta);
-        //double y = newR * Math.sin(theta);
         double x = scale * p.x / r;
         double y = scale * p.y / r;
 

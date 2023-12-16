@@ -4,8 +4,11 @@ public class Fractal {
 
     public interface Transformation {
         Point apply(Point p);
+
         int getRed();
+
         int getGreen();
+
         int getBlue();
     }
 

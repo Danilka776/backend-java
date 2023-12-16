@@ -5,12 +5,16 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Renderer {
-    private static final Random random = ThreadLocalRandom.current();
+    private static final Random RANDOM = ThreadLocalRandom.current();
     public static final double X_MIN = -1.0;
     public static final double X_MAX = 1.0;
     public static final double Y_MIN = -1.0;
     public static final double Y_MAX = 1.0;
 
+    private Renderer() {
+    }
+
+    @SuppressWarnings("MagicNumber")
     public static Fractal.FractalImage render(
         Fractal.FractalImage canvas,
         List<Fractal.Transformation> affineTransformations,
@@ -19,8 +23,8 @@ public class Renderer {
         int iterPerSample,
         long seed
     ) {
-        //random.setSeed(seed);
         double symmetry = 2.0;
+
 
         for (int num = 0; num < samples; ++num) {
             Point pw = randomPoint();
@@ -49,15 +53,16 @@ public class Renderer {
         return canvas;
     }
 
+    @SuppressWarnings("MagicNumber")
     private static Point randomPoint() {
-        double x = random.nextDouble(X_MIN, X_MAX);
-        double y = random.nextDouble(Y_MIN, Y_MAX);
+        double x = RANDOM.nextDouble(X_MIN, X_MAX);
+        double y = RANDOM.nextDouble(Y_MIN, Y_MAX);
         return new Point(x, y, 255, 255, 255);
     }
 
 
     private static Fractal.Transformation randomVariation(List<Fractal.Transformation> variations) {
-        return variations.get(random.nextInt(variations.size()));
+        return variations.get(RANDOM.nextInt(variations.size()));
     }
 
     private static Point rotate(Point p, double theta) {

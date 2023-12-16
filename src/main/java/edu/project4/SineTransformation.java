@@ -3,12 +3,13 @@ package edu.project4;
 import java.util.Random;
 
 public class SineTransformation implements Fractal.Transformation {
-    private final double a, b;
+    private final double a;
+    private final double b;
 
     private final Random random = new Random();
-    private final int Red = random.nextInt(256);
-    private final int Green = random.nextInt(256);
-    private final int Blue = random.nextInt(256);
+    private final int red = random.nextInt(256);
+    private final int green = random.nextInt(256);
+    private final int blue = random.nextInt(256);
 
     public SineTransformation(double a, double b) {
         this.a = a;
@@ -20,21 +21,21 @@ public class SineTransformation implements Fractal.Transformation {
         double x = a * Math.sin(p.x);
         double y = b * Math.sin(p.y);
 
-        return new Point(x, y, Red, Green, Blue);
+        return new Point(x, y, red, green, blue);
     }
 
     @Override
     public int getRed() {
-        return Red;
+        return red;
     }
 
     @Override
     public int getGreen() {
-        return Green;
+        return green;
     }
 
     @Override
     public int getBlue() {
-        return Blue;
+        return blue;
     }
 }
