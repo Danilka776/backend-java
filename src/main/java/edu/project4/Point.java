@@ -14,6 +14,13 @@ public class Point {
         this.green = green;
         this.blue = blue;
     }
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+        this.red = 0;
+        this.green = 0;
+        this.blue = 0;
+    }
 
     public double[] getPoint() {
         return new double[]{x, y};

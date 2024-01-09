@@ -25,25 +25,26 @@ public class FractalRenderer {
         int height = 1080;
         Fractal.FractalImage fractalImage = Fractal.FractalImage.create(width, height);
 
-        List<Transformation> affineTransformation = getAffineTransformation(8);
+        List<Transformation> affineTransformation = getAffineTransformation(20);
         List<Transformation> nonLinearTransformation = new ArrayList<>();
-        //affineTransformation.add(new LinearTransformation(0.5, 0, 0, 0.5, 0.8, 1));  // Линейное преобразование
-        //affineTransformation.add(new LinearTransformation(0, 0.9, 0, 0.5, 0, 0));  // Линейное преобразование
         // Синусоидальное преобразование
-        nonLinearTransformation.add(new SineTransformation((double) 1920 / 2, (double) 1080 / 2));
-        nonLinearTransformation.add(new SphericalTransformation(0.1));  // Сферическое преобразование
-        nonLinearTransformation.add(new DiskTransformation(0.05));  // Диск преобразование
-        nonLinearTransformation.add(new HeartTransformation(0.5));  // Сердце преобразование
+//        nonLinearTransformation.add(new SineTransformation((double) 3, (double) 2));
+//        nonLinearTransformation.add(new SineTransformation((double) 1, (double) 0));
+//        nonLinearTransformation.add(new SineTransformation((double) 3, (double) 1));
+        //nonLinearTransformation.add(new SphericalTransformation(0.9));  // Сферическое преобразование
+        //nonLinearTransformation.add(new DiskTransformation(0.05));  // Диск преобразование
+        nonLinearTransformation.add(new HeartTransformation(0.6));  // Сердце преобразование
+        //nonLinearTransformation.add(new SwirlTransformation(1, 1));  // Swirl преобразование
+        nonLinearTransformation.add(new HorseshoeTransformation(0.9));  // Horseshoe преобразование
         int samples = 100000;
         int iterPerSample = 200;
-        long seed = System.currentTimeMillis();
 
         FractalImage renderedImage = Renderer.render(fractalImage, affineTransformation, nonLinearTransformation,
-            samples, iterPerSample, seed);
+            samples, iterPerSample);
 
         BufferedImage bufferedImage = createBufferedImage(renderedImage);
         saveImage(bufferedImage,
-            "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/project4/pictures/fractal_image_8.png");
+            "/Users/daniltarasov/backend-java/backend-java/src/main/java/edu/project4/pictures/fractal_image_9.png");
     }
 
     @SuppressWarnings("MagicNumber")

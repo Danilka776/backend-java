@@ -20,11 +20,8 @@ public class Renderer {
         List<Fractal.Transformation> affineTransformations,
         List<Fractal.Transformation> nonLinearTransformations,
         int samples,
-        int iterPerSample,
-        long seed
+        int iterPerSample
     ) {
-        double symmetry = 2.0;
-
 
         for (int num = 0; num < samples; ++num) {
             Point pw = randomPoint();
